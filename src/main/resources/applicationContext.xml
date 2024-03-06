@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Определения бинов для музыкальных треков -->
+    <bean id="classicMusicTrack" class="com.example.demo.ClassicMusicTrack">
+        <constructor-arg value="Beethoven's Symphony No.9"/>
+    </bean>
+    <bean id="rockMusicTrack" class="com.example.demo.RockMusicTrack">
+        <constructor-arg value="Stairway to Heaven"/>
+    </bean>
+
+    <!-- Определение бина для музыкального плеера -->
+    <bean id="musicPlayer" class="com.example.demo.MusicPlayer">
+        <constructor-arg ref="classicMusicTrack"/>
+        <property name="name" value="${player.name}"/>
+    </bean>
+
+    <!-- Конфигурация для замены плейсхолдеров свойствами из файла -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:musicPlayer.properties"/>
+    </bean>
+
+</beans>
